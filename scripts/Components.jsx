@@ -4,7 +4,7 @@ import React from "react";  //Импорты обязательны!!!
 export class Menu extends React.Component{
     render(){
         return (<div className="menu">
-        <section className="logo">.KoSo</section>
+        <section className="logo"><a href="index.html">.KoSo</a></section>
         <nav className="navbar">
             <a href="index.html" className={this.props.pg == "index" ? "active" : ""}>Главная</a>
             <a href="/pages/about.html" className={this.props.pg == "about" ? "active" : ""}>О нас</a>
