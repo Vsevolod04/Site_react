@@ -52,7 +52,6 @@ export class GenButton extends React.Component{
             <img src="/icon/web-app-manifest-192x192.png" alt="arrow_icon"/>
         </a>
     }
-
     DefaultProps = {text: "Button", func: null}
 }
 

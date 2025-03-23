@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom/client"; //Импорты обязательны!!!
-import { Menu, MobileHeader } from "./Components";
+import { Menu, MobileHeader, GenButton } from "./Components";
 
 ReactDOM.createRoot(document.querySelector("header")).render(
   <div>
@@ -8,7 +8,9 @@ ReactDOM.createRoot(document.querySelector("header")).render(
   </div>
 );
 
-
+ReactDOM.createRoot(document.getElementById("CV")).render(
+  <GenButton text="Скачать резюме"/>
+);
 
 
 

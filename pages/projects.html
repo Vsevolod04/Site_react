@@ -66,28 +66,10 @@
                 </div>
             </div>
 
-            <div class="load_link">
-                <a href="#">Загрузить больше</a>
-                <img src="../icon/web-app-manifest-192x192.png" alt="arrow_icon">
-            </div>
-
-            <div class="reviews">
-
+            <div class="load_link" id="load_link">
             </div>
         </div>
     </main>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const menuToggle = document.querySelector(".menu-toggle");
-            const menu = document.querySelector(".menu");
-
-            menuToggle.addEventListener("click", function () {
-                menu.classList.toggle("active");
-                menuToggle.classList.toggle("active");
-            });
-        });
-    </script>
 </body>
 
 </html>

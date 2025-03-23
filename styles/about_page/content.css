@@ -184,9 +184,6 @@ main {
 }
 
 .lower_content .CV {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
   margin-top: 2vh;
   padding: 4%;
@@ -195,6 +192,9 @@ main {
 }
 
 .lower_content .CV a {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   color: white;
   text-decoration: none;
 }

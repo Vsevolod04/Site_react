@@ -49,9 +49,6 @@ main {
 /*Кнопка загрузить больше*/
 
 .blog_link {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
   margin-top: 2vh;
   min-width: fit-content; /*Настройки ширины чтобы переноса слов не было*/
@@ -63,6 +60,9 @@ main {
 }
 
 .blog_link a {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   color: white;
   text-decoration: none;
 }

@@ -74,8 +74,6 @@ main {
 
 .load_link {
   display: flex;
-  justify-content: center;
-  align-items: center;
   margin-top: 2vh;
   width: 30%;
   max-width: 250px;
@@ -84,12 +82,14 @@ main {
   padding-block: 2%;
   padding-inline: 5%;
   align-self: center;  
-
   cursor: pointer;
   background-color: black;
 }
 
 .load_link a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: white;
   text-decoration: none;
   white-space: nowrap;
