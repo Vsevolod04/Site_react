@@ -1,2 +1,3 @@
-# Site_react
-SSP Lab3 with React and Vite
+# React + Vite
+
+LAB 3 for SSP
