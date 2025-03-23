@@ -45,6 +45,16 @@ function popMenu () {
 
 
 //Дефолтная кнопка
+export class GenButton extends React.Component{
+    render(){
+        return  <a className="button">
+            {this.props.text}
+            <img src="/icon/web-app-manifest-192x192.png" alt="arrow_icon"/>
+        </a>
+    }
+
+    DefaultProps = {text: "Button", func: null}
+}
 
 
 
