@@ -1,0 +1,246 @@
+@font-face {
+  font-family: "main";
+  src: url("../assets/fonts/IBM_Plex_Sans/IBMPlexSans-VariableFont_wdth\,wght.ttf");
+}
+
+@font-face {
+  font-family: "logo";
+  src: url("../assets/fonts/IBM_Plex_Serif/IBMPlexSerif-Bold.ttf");
+}
+
+@font-face {
+  font-family: "sans_medium";
+  src: url("../assets/fonts/IBM_Plex_Sans/static/IBMPlexSans-Medium.ttf");
+}
+
+@font-face {
+  font-family: "sans_bold_italic";
+  src: url("../assets/fonts/IBM_Plex_Sans/static/IBMPlexSans-BoldItalic.ttf");
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "main";
+}
+
+body {
+  display: flex;   /*НЕ УБИРАТЬ*/
+  height: auto;
+}
+
+/* ==== Меню ==== */
+.menu {
+  width: 20vw;
+  max-width: 250px;
+  height: 100%;
+  min-height: fit-content;
+  padding-inline: 3%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+
+  padding-block: 3vh;
+  transition: top 0.7s ease-out;
+}
+
+.logo {
+  margin-top: 2vh;
+  font-family: "logo";
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 30px;
+}
+
+.navbar {
+  margin-top: 7vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  transition: 0.3s;
+  font-size: 1.3rem;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  font-weight: bold;
+  font-size: 1.6rem;
+  border-left: 4px solid white;
+  padding-left: 10px;
+}
+
+.links {
+  flex-direction: column;
+  margin-top: 10%;
+  display: flex;
+  gap: 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.links a img {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.links a:hover img {
+  transform: scale(1.2);
+}
+
+.copyright {
+  font-size: 1rem;
+  color: white;
+  text-align: left;
+  padding-bottom: 15px;
+}
+
+/* Основной контент */
+main {
+  margin-left: 20vw;
+  padding: 20px;
+}
+
+/* ==== Мобильное меню ==== */
+.mobile-header {
+  display: none;
+  background: #222;
+  color: white;
+  padding: 2% 3%;
+  position: fixed;
+  box-sizing: border-box;
+  width: 100%;
+  height: fit-content;
+  max-height: 15vh;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+
+
+  z-index: 1000;
+}
+
+/* ==== Адаптация под широкие устройства ==== */
+
+@media screen and (min-width: 1800px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 1800px) and (min-width: 1250px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 1250px) and (min-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 1250px) {
+  main {
+    margin-left: 250px;
+  }
+}
+
+/* ==== Адаптация под мобильные устройства ==== */
+
+@media screen and (max-height: 660px) {
+  .menu .links {
+    display: none;
+  }
+
+  .menu .navbar {
+    gap: 0;
+  }
+
+  .menu .links {
+    margin: 0;
+    padding: 3%;
+  }
+
+  .menu .copyright {
+    margin-top: 20%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 12px;
+  }
+
+  main {
+    margin-left: 0;
+    margin-top: 15vh;
+  }
+
+  .menu {
+    width: 100%;
+    top: -300%;
+    align-items: start;
+    padding-top: 5vh;
+    z-index: 900;
+  }
+
+  .menu.active {
+    top: 0;
+  }
+
+  .mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .logo {
+    margin-bottom: 0;
+  }
+
+  .menu .logo{
+    display: none;
+  }
+
+  .menu .links {
+    padding-left: 15px;
+  }
+
+  .menu .links a img {
+    width: 25px;
+    height: 25px;
+    transition: transform 0.2s ease-in-out;
+  }
+
+}
+
+
+@media screen and (max-width: 360px) {
+  html {
+    font-size: 10px;
+  }
+}

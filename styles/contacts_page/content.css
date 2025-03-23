@@ -1,0 +1,158 @@
+main {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-right: 3%;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Левая часть */
+
+.left_side h2:nth-child(1) {
+  font-weight: 500;
+  margin-bottom: 4%;
+  font-size: 1rem;
+}
+
+.left_side p:nth-child(2) {
+  font-size: 2.5rem;
+  margin-bottom: 4%;
+}
+
+.left_side address:nth-child(3) {
+  font-style: normal;
+  margin-bottom: 15%;
+}
+
+.left_side p:nth-child(4) {
+  font-size: 1.9rem;
+  margin-bottom: 4%;
+}
+
+.left_side p:nth-child(5) {
+  font-size: 1.9rem;
+  margin-bottom: 15%;
+}
+
+.social_networks {
+  display: flex;
+  gap: 5%;
+  font-size: 0.8rem;
+}
+
+.social_networks a {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+}
+
+/* Форма справа */
+
+.right_side {
+  background-image: linear-gradient(
+    to right,
+    #be69eb 0%,
+    #e04f4f 50%,
+    #f0a21a 100%
+  );
+  padding-inline: 7%;
+  padding-block: 5%;
+  color: white;
+  width: 50%;
+}
+
+.form_first_line {
+  display: flex;
+  gap: 8%;
+  width: 100%;
+}
+
+/*Поля фио и емейл занимают по 50% ширины*/
+.form_first_line input {
+  width: 50%;
+}
+
+.right_side > h2:first-child {
+  font-weight: bold;
+  font-size: 2rem;
+  margin-bottom: 5%;
+}
+
+.right_side form {
+  display: flex;
+  flex-direction: column;
+  gap: 4vh;
+}
+
+.right_side form input,
+.right_side form textarea {
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 0.1rem solid white;
+  color: white;
+  padding-block: 3%; /*placeholder не прижат ко дну*/
+}
+
+.right_side form input::placeholder,
+.right_side form textarea::placeholder {
+  color: white;
+  font-weight: 300;
+}
+
+/*Убрать рамку при фокусе input*/
+.right_side form input:focus,
+.right_side form textarea:focus {
+  outline: none;
+}
+
+label[for="input_file"] {
+  display: flex;
+  gap: 3%;
+  font-weight: 300;
+}
+
+.right_side form button[type="submit"] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 35%;
+  min-width: fit-content;
+  gap: 4%;
+  padding: 3%;
+  background: black;
+  color: white;
+  border: none;
+}
+
+.right_side form button[type="submit"] img {
+  max-height: 2vh;
+  background-image: linear-gradient(
+    to right,
+    #be69eb 0%,
+    #e04f4f 50%,
+    #f0a21a 100%
+  );
+}
+
+.right_side form button[type="submit"] p {
+  font-size: 1rem;
+}
+
+/*Мобилки*/
+
+@media (max-width: 768px) {
+
+  main {
+    margin-left: 0;
+    flex-wrap: wrap;
+    max-height: fit-content;
+    gap: 5%;
+  }
+
+  .right_side {
+    width: 100%;
+  }
+}

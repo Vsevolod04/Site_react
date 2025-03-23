@@ -1,0 +1,147 @@
+main {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: nowrap;
+  height: 100vh;
+  width: fit-content;
+}
+
+.content,
+.photo {
+  flex-basis: 45%; 
+  max-width: 45%; 
+  height: auto;
+}
+
+.content{
+  margin-left: 5%;
+}
+
+.text h1:first-child {
+  max-width: 70%;
+  font-weight: 400;
+  font-family: "main";
+  font-size: 5rem;
+}
+
+.text p:nth-child(2) {
+  font-family: "main";
+  font-size: 2rem;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5%;
+  width: 60%;
+  min-height: 4vh;
+  max-width: 250px;
+  padding-block: 1.5%;
+  padding-inline: 3%;
+  background-color: black;
+  cursor: pointer;
+  gap: 5%;
+
+  font-family: "sans_medium";
+  font-size: 1rem;
+  text-decoration: none;
+  color: white;
+}
+
+.button img {
+  width: 10%;
+  height: 10%;
+  background-image: linear-gradient(
+    to right,
+    #be69eb 0%,
+    #e04f4f 50%,
+    #f0a21a 100%
+  );
+}
+
+.contact_info {
+  margin-top: 10vh;
+  display: flex;
+  gap: 10%;
+
+  font-size: 1.2rem;
+  font-style: italic;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+
+.phone,
+.mail {
+  display: flex;
+  align-items: center;
+  gap: 10%;
+}
+
+.photo {
+  margin: 5%;
+}
+.photo img {
+  max-width: 100%;
+  height: auto;
+}
+
+.socials {
+  display: flex;
+  flex-direction: column;
+  width: 10%;
+  align-items: center;
+  gap: 10%;
+}
+.socials img {
+  height: 10%;
+}
+
+
+
+@media (max-width: 550px) or (max-height: 460px){
+
+    main{
+      flex-direction: column;
+      align-items: center;
+      height: fit-content;
+      gap: 4vh;
+    }
+
+
+    .content{
+        width: fit-content;
+        margin: 0
+    }
+
+    .content .text h1{
+      font-size: 3rem;
+    }
+
+    .content .text p{
+      font-size: 1.5rem;
+    }
+
+    .contact_info{
+        flex-direction: column;
+        margin-top: 25%;
+        font-size: 0.7rem;
+        white-space: wrap;
+    }
+
+    .button{
+      width: fit-content;
+      font-size: 0.7rem;
+    }
+
+    .photo{
+      margin: 0;
+    }
+
+    .socials{
+        display: none;
+    }
+
+  }

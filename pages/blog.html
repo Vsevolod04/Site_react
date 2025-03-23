@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="../styles/style.css">
+    <link rel="stylesheet" type="text/css" href="../styles/blog_page/content.css">
+
+    <title>Блог</title>
+    <link rel="icon" type="image/png" href="icon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="/icon/favicon.ico">
+    <link rel="shortcut icon" href="/icon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+</head>
+
+<body>
+    <script type="module" src="/scripts/blog.jsx"></script>
+
+    <header></header>
+
+    <main>
+        <section class="page_title">
+            <h1><i>Блог</i></h1>
+            <p>ЧИТАЙТЕ НАШ БЛОГ</p>
+        </section>
+
+        <div class="blog">
+            <div class="blog_block">
+                <img src="../assets/photos/blog1.png" alt="blog_photo">
+                <p><i>10 февраля, 2025</i></p>
+                <p>10 примеров сайтов-портфолио </p>
+                <img src="../assets/svg/horizontal_line.svg" alt="horizontal_line">
+            </div>
+
+            <div class="blog_block">
+                <img src="../assets/photos/blog2.png" alt="blog_photo">
+                <p><i>1 февраля, 2025</i></p>
+                <p>5 советов, как работать в команде</p>
+                <img src="../assets/svg/horizontal_line.svg" alt="horizontal_line">
+            </div>
+
+            <div class="blog_block">
+                <img src="../assets/photos/blog3.png" alt="blog_photo">
+                <p><i>20 января, 2025</i></p>
+                <p>Защита сайтов от кибер-атак</p>
+                <img src="../assets/svg/horizontal_line.svg" alt="horizontal_line">
+            </div>
+        </div>
+
+
+        <div class="blog_link">
+            <a href="#">Загрузить больше</a>
+            <img src="../icon/web-app-manifest-192x192.png" alt="arrow_icon">
+        </div>
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.querySelector(".menu-toggle");
+            const menu = document.querySelector(".menu");
+
+            menuToggle.addEventListener("click", function () {
+                menu.classList.toggle("active");
+                menuToggle.classList.toggle("active");
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,13 +1,71 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="styles/main_page/main/content.css">
+
+    <title>Главная страница</title>
+    <link rel="icon" type="image/png" href="icon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/icon/favicon.ico" />
+    <link rel="shortcut icon" href="/icon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+</head>
+
+<body>
+    <script type="module" src="/scripts/index.jsx"></script>
+
+    <header></header>
+    
+    <main>
+        <div class="content">
+            <div class="text">
+                <h1>
+                    Студия дизайна <strong>.KoSo</strong>
+                </h1>
+                <p>
+                    <i><b>Студия</b></i> находится в <i><b>Минске</b></i>
+                </p>
+            </div>
+
+            <div>
+                <a class="button">
+                    Связаться с нами
+                    <img src="icon/web-app-manifest-192x192.png" alt="arrow_icon">
+                </a>
+            </div>
+
+            <div class="contact_info">
+                <div class="phone">
+                    <img src="assets/svg/phone.svg">
+                    +375-12-345-67-89
+                </div>
+
+                <div class="mail">
+                    <img src="assets/svg/mail.svg">
+                    koso@gmail.com
+                </div>
+
+            </div>
+        </div>
+
+        <div class="photo">
+            <img src="assets/photos/main_photo.png" alt="photo">
+        </div>
+
+        <div class="socials">
+            <section class="links">
+                <a href="#"><img src="assets/svg/inst.svg" alt="inst"></a>
+                <a href="#"><img src="assets/svg/tg_black.svg" alt="tg"></a>
+                <a href="#"><img src="assets/svg/linkedin_black.svg" alt="linkedin"></a>
+            </section>
+            <img src="assets/photos/vertical_line.png">
+        </div>
+    </main>
+</body>
+
 </html>

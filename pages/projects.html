@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="../styles/style.css">
+    <link rel="stylesheet" type="text/css" href="../styles//projects_page/content.css">
+
+    <title>Проекты</title>
+    <link rel="icon" type="image/png" href="icon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="/icon/favicon.ico">
+    <link rel="shortcut icon" href="/icon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+</head>
+
+<body>
+    <script type="module" src="/scripts/projects.jsx"></script>
+    <header></header>
+
+    <main>
+        <div class="content">
+
+            <div class="title">
+                <p class="works">Работы</p>
+                <p class="res_pr">Недавние проекты</p>
+            </div>
+
+            <div class="projects">
+                <div class="project">
+                    <div class="text">
+                        <p>Сайт-визитка</p>
+                        <p>Ком<wbr>пания AAA Comp</p>
+                        <img src="../assets/photos/projects_page/north_east.png" alt="north_east">
+                    </div>
+                    <img src="../assets/photos/projects_page/pr1.png" alt="pr1">
+                </div>
+
+                <div class="project">
+                    <div class="text">
+                        <p>Интернет-магазин</p>
+                        <p>Cho<wbr>colate Shop</p>
+                        <img src="../assets/photos/projects_page/north_east.png" alt="north_east">
+                    </div>
+                    <img src="../assets/photos/projects_page/pr2.png" alt="pr2">
+                </div>
+
+                <div class="project">
+                    <div class="text">
+                        <p>Новостной сайт</p>
+                        <p>Ка<wbr>нал CCD</p>
+                        <img src="../assets/photos/projects_page/north_east.png" alt="north_east">
+                    </div>
+                    <img src="../assets/photos/projects_page/pr3.png" alt="pr3">
+                </div>
+
+                <div class="project">
+                    <div class="text">
+                        <p>Сайт с услугами</p>
+                        <p>Кон<wbr>салтин<wbr>говое агенство</p>
+                        <img src="../assets/photos/projects_page/north_east.png" alt="north_east">
+                    </div>
+                    <img src="../assets/photos/projects_page/pr4.png" alt="pr4">
+                </div>
+            </div>
+
+            <div class="load_link">
+                <a href="#">Загрузить больше</a>
+                <img src="../icon/web-app-manifest-192x192.png" alt="arrow_icon">
+            </div>
+
+            <div class="reviews">
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.querySelector(".menu-toggle");
+            const menu = document.querySelector(".menu");
+
+            menuToggle.addEventListener("click", function () {
+                menu.classList.toggle("active");
+                menuToggle.classList.toggle("active");
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,283 @@
+main {
+  display: flex;
+  justify-content: space-between;
+  max-width: 100vw;
+  margin-top: 4%;
+  padding-left: 0;
+  padding-block: 0;
+  align-items: center;
+}
+
+/* ==== Информация сайта ==== */
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.horizontal_line {
+  max-width: 100%;
+  width: 60vw;
+}
+
+/* ==== Верхняя половина ==== */
+
+.upper_content {
+  display: flex;
+  flex-direction: row;
+  padding-left: 8%;
+  gap: 5vw;
+}
+
+/* Левая часть */
+
+.upper_content .left_side{
+  max-width: 50%;
+}
+
+.upper_content .text p:first-child {
+  font-family: "main";
+  font-size: 1.3rem;
+  /* word-wrap: break-word; */
+}
+
+.upper_content .text p:nth-child(2) {
+  font-family: "main";
+  font-size: calc(20px + 30 * (100vw - 320px) / 960);
+}
+
+.photo {
+  font-size: 1rem;
+  text-align: center;
+  font-weight: bold;
+  width: 25vw;
+  margin-block: calc(1vw + 1vh);
+}
+
+.photo img {
+  max-width: 100%;
+}
+
+.photo p span {
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  color: #e36c11;
+}
+
+.upper_content .CV {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2vh;
+  padding: 4%;
+  cursor: pointer;
+}
+
+.upper_content .CV a {
+  color: black;
+}
+
+.upper_content .CV img {
+  background-color: black;
+  max-height: 2vh;
+  min-height: 24px;
+  margin-left: 10%;
+}
+
+/* Правая часть */
+
+.upper_content .right-side {
+  margin-top: 15vh;
+  padding-left: 2vw;
+}
+
+.contact_info {
+  display: flex;
+  gap: 1vw;
+}
+
+.contact_info p {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 1.3rem;
+  width: 15vw;
+}
+
+.contact_info img {
+  width: 3vw;
+  min-width: 20px;
+}
+
+.phone,
+.mail,
+.experience,
+.location {
+  display: flex;
+  align-items: center;
+  gap: 2vw;
+}
+
+.experience_inf {
+  margin-top: 4vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.experience_inf .experience_inf_block:first-child {
+  margin-right: 7%;
+}
+
+.experience_inf_block {
+  display: flex;
+  flex-direction: column;
+  max-width: 50%;
+}
+
+.experience_inf_block p:first-child span {
+  font-size: 2rem;
+  color: #b300ff;
+}
+
+.lorem_ipsum {
+  display: flex;
+  align-items: center;
+  margin-top: 4vh;
+  padding: 5%;
+  background-color: black;
+  color: white;
+}
+
+.lorem_ipsum img {
+  margin-right: 5%;
+}
+
+/*Нижняя часть*/
+
+.lower_content {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5vh;
+  padding: 10%;
+  gap: 8%;
+  width: 85vw;
+  color: white;
+  background-image: linear-gradient(
+    to right,
+    #be69eb 0%,
+    #e04f4f 50%,
+    #f0a21a 100%
+  );
+}
+
+.lower_content .left_side {
+  max-width: 40%;
+}
+
+.lower_content .left_side p:nth-child(1) {
+  font-size: 1rem;
+}
+
+.lower_content .left_side p:nth-child(2) {
+  font-size: 3rem;
+  margin-block: 5%;
+}
+
+.lower_content .CV {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2vh;
+  padding: 4%;
+  cursor: pointer;
+  background-color: black;
+}
+
+.lower_content .CV a {
+  color: white;
+  text-decoration: none;
+}
+
+.lower_content .CV img {
+  background-image: linear-gradient(
+    to right,
+    #be69eb 0%,
+    #e04f4f 50%,
+    #f0a21a 100%
+  );
+  max-height: 3vh;
+  min-height: 24px;
+  margin-left: 10%;
+}
+
+.lower_content .right_side {
+  display: flex;
+  flex-direction: column;
+  max-width: 60%;
+  gap: 3vh;
+}
+
+.lower_content .step p:nth-child(2) {
+  font-size: 2rem;
+}
+
+
+/*Мобилки*/
+
+@media (max-width: 768px) {
+  main {
+    padding-inline: 5%;
+    margin-top: 15vh;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  .upper_content {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
+
+  .upper_content .photo {
+    width: 100%;
+  }
+
+  .contact_info {
+    width: 100%;
+    flex-direction: column;
+    white-space: nowrap;
+  }
+
+  .lower_content {
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 5%;
+  }
+
+  .lower_content .left_side {
+    max-width: 100%;
+    margin-bottom: 20%;
+  }
+
+  .lower_content .left_side p:nth-child(2) {
+    font-size: 2rem;
+    margin-block: 5%;
+  }
+
+  .lower_content .right_side {
+    display: flex;
+    flex-direction: column;
+    max-width: fit-content;
+    gap: 3vh;
+  }
+
+  .lower_content .step p:nth-child(2) {
+    font-size: 1.5rem;
+  }
+}

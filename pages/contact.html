@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="../styles/style.css">
+    <link rel="stylesheet" type="text/css" href="../styles/contacts_page/content.css">
+
+    <title>О нас</title>
+    <link rel="icon" type="image/png" href="icon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="/icon/favicon.ico">
+    <link rel="shortcut icon" href="/icon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+</head>
+
+<body>
+    <script type="module" src="/scripts/contact.jsx"></script>
+    <header></header>
+
+    <main>
+
+        <section class="left_side">
+            <h2><i>Контакты</i></h2>
+            <p><b>СВЯЖИТЕСЬ С НАМИ</b></p>
+            <address>ул. Скрыганова 5, этаж 6, пом. 615, Минск, Беларусь.</address>
+            <p><b>+375-12-345-67-89</b></p>
+            <p><b>koso@gmail.com</b></p>
+            <div class="social_networks">
+                <a href="#">TELEGRAM</a>
+                <a href="#">FACEBOOK</a>
+                <a href="#">INSTAGRAM</a>
+                <a href="#">LINKEDIN</a>
+            </div>
+        </section>
+
+        <section class="right_side">
+            <h2>ЕСТЬ ПРОЕКТ?</h2>
+            <form method="post">
+                <div class="form_first_line">
+                    <input type="text" name="name" placeholder="ФИО">
+                    <input type="email" name="email" placeholder="EMAIL">
+                </div>
+                <textarea name="message" placeholder="СООБЩЕНИЕ" rows="2"></textarea>
+                <input type="file" name="input_file" id="input_file" hidden>
+                <label for="input_file">
+                    <img src="../assets/svg/attach.svg" alt="attach_icon">
+                    ПРИКРЕПИТЬ ФАЙЛ
+                </label>
+                <button type="submit">
+                    Отправить
+                    <img src="../icon/web-app-manifest-192x192.png" alt="arrow_ico">
+                </button>
+            </form>
+        </section>
+
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.querySelector(".menu-toggle");
+            const menu = document.querySelector(".menu");
+
+            menuToggle.addEventListener("click", function () {
+                menu.classList.toggle("active");
+                menuToggle.classList.toggle("active");
+            });
+        });
+    </script>
+</body>
+
+</html>
