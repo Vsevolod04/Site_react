@@ -1,7 +1,7 @@
 import * as React from "react"; //Импорты обязательны!!!
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 
 //Боковое Меню
@@ -101,20 +101,28 @@ export class GenButton extends React.Component {
       </a>
     );
   }
-  DefaultProps = { text: "Button", func: null };
+  DefaultProps = { text: "Button" /*, func: null*/ };
 }
 
 export class BlogCard extends React.Component {
   render() {
-    return <Card>
-      <CardContent>
-        <Typography variant="h5" component="div">
-          Заголовок карточки
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Это текст внутри карточки. Вы можете добавлять сюда всё, что угодно!
-        </Typography>
-      </CardContent>
-    </Card>;
+    return (
+      <Card className="blog_block">
+        <CardMedia 
+            component="img"  //для адекватного отображения картинки, component указывает, какой это html элемент
+            image={this.props.img}
+            alt="blog_photo"
+            title="blog 1"/>
+        <CardContent>   
+          <Typography component="p" sx={{fontSize: "1.3rem", fontStyle: "italic"}}> 
+            {this.props.date}
+          </Typography>
+          <Typography component="p" variant="body" sx={{fontSize: "1.7rem",
+                    fontWeight: "bold"}}>
+            {this.props.text}
+          </Typography>
+        </CardContent>
+      </Card>
+    );
   }
 }

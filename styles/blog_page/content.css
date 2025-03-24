@@ -24,26 +24,13 @@ main {
 
 .blog {
   display: flex;
+  justify-content: center;
   gap: 3vw;
   max-width: 100vw;
 }
 
-.blog_block {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  max-width: 18vw;
-  font-size: 1.3rem;
-}
-
-.blog_block p:nth-child(3) {
-  font-size: 1.7rem;
-  font-weight: bold;
-  margin-bottom: 5%;
-}
-
-.blog_block img {
-  width: 100%; /*Фото остается внутри блока*/
+.blog_block{
+  max-width: 27%;
 }
 
 /*Кнопка загрузить больше*/
@@ -99,9 +86,8 @@ main {
   }
 
   .blog_block {
-    display: flex;
-    flex-direction: column;
-    max-width: 60vmin;
+    max-width: 60vmin ;
+    word-wrap: break-word;
     gap: 1vh;
   }
 

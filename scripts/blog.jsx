@@ -13,9 +13,16 @@ ReactDOM.createRoot(document.getElementById("blog_link")).render(
   <GenButton text="Загрузить больше"/>
 );
 
-//ReactDOM.createRoot(document.getElementById("blog")).render(
- //   <BlogCard className="blog_block"/>
-//);
+ReactDOM.createRoot(document.getElementById("blog")).render(
+  <div className="blog">
+    <BlogCard className="blog_block" date="10 Февраля, 2025"
+      text="10 примеров сайтов-портфолио" img="/assets/photos/blog1.png"/>
+    <BlogCard className="blog_block" date="1 Февраля, 2025" 
+      text="5 советов, как работать в команде" img="/assets/photos/blog2.png"/>
+    <BlogCard className="blog_block" date="20 Января, 2025" 
+      text="Защита сайтов от кибер-атак" img="/assets/photos/blog3.png"/>
+  </div>
+);
 
 
 
