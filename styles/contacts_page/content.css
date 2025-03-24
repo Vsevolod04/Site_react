@@ -38,15 +38,8 @@ main {
 .social_networks div{
   display: flex;
   gap: 5%;
-  font-size: 0.8rem;
 }
 
-/* Стиль кнопки Material UI */
-.social_networks div * {
-  color: black;
-  font-weight: 500;
-  font-family: "main"
-}
 
 /* Форма справа */
 

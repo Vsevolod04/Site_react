@@ -11,9 +11,17 @@ ReactDOM.createRoot(document.querySelector("header")).render(
 
 ReactDOM.createRoot(document.getElementById("social_networks")).render(
   <div>
-    <Button variant="text" href="#">TELEGRAM</Button>
-    <Button variant="text" href="#">INSTAGRAM</Button>
-    <Button variant="text" href="#">FACEBOOK</Button>
-    <Button variant="text" href="#">LINKEDIN</Button>
+    <Button sx={{color: "black", fontFamily: "main", fontWeight: 500}} variant="text" href="#">
+      TELEGRAM
+    </Button>
+    <Button sx={{color: "black", fontFamily: "main", fontWeight: 500}} variant="text" href="#">
+      INSTAGRAM
+    </Button>
+    <Button sx={{color: "black", fontFamily: "main", fontWeight: 500}} variant="text" href="#">
+      FACEBOOK
+    </Button>
+    <Button sx={{color: "black", fontFamily: "main", fontWeight: 500}} variant="text" href="#">
+      LINKEDIN
+    </Button>
   </div>
 );
