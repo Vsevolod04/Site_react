@@ -35,16 +35,17 @@ main {
   margin-bottom: 15%;
 }
 
-.social_networks {
+.social_networks div{
   display: flex;
   gap: 5%;
   font-size: 0.8rem;
 }
 
-.social_networks a {
-  text-decoration: none;
+/* Стиль кнопки Material UI */
+.social_networks div * {
   color: black;
   font-weight: 500;
+  font-family: "main"
 }
 
 /* Форма справа */
