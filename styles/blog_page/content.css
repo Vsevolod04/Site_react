@@ -63,6 +63,7 @@ main {
   );
   max-height: 3vh;
   margin-left: 10%;
+  background-color: rgba(0, 166, 255, 0.5);
 }
 
 /*Мобилки*/

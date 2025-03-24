@@ -11,16 +11,60 @@ ReactDOM.createRoot(document.querySelector("header")).render(
 
 ReactDOM.createRoot(document.getElementById("social_networks")).render(
   <div>
-    <Button sx={{color: "black", fontFamily: "main", fontWeight: 500}} variant="text" href="#">
+    <Button
+      sx={{
+        color: "black",
+        fontFamily: "main",
+        fontWeight: 500,
+        "&:hover": {
+          backgroundColor: "rgba(0, 0, 0, 0.1)", // цвет кнопки при наведении
+        },
+      }}
+      variant="text"
+      href="#"
+    >
       TELEGRAM
     </Button>
-    <Button sx={{color: "black", fontFamily: "main", fontWeight: 500}} variant="text" href="#">
+    <Button
+      sx={{
+        color: "black",
+        fontFamily: "main",
+        fontWeight: 500,
+        "&:hover": {
+          backgroundColor: "rgba(0, 0, 0, 0.1)",
+        },
+      }}
+      variant="text"
+      href="#"
+    >
       INSTAGRAM
     </Button>
-    <Button sx={{color: "black", fontFamily: "main", fontWeight: 500}} variant="text" href="#">
+    <Button
+      sx={{
+        color: "black",
+        fontFamily: "main",
+        fontWeight: 500,
+        "&:hover": {
+          backgroundColor: "rgba(0, 0, 0, 0.1)",
+        },
+      }}
+      variant="text"
+      href="#"
+    >
       FACEBOOK
     </Button>
-    <Button sx={{color: "black", fontFamily: "main", fontWeight: 500}} variant="text" href="#">
+    <Button
+      sx={{
+        color: "black",
+        fontFamily: "main",
+        fontWeight: 500,
+        "&:hover": {
+          backgroundColor: "rgba(0, 0, 0, 0.1)",
+        },
+      }}
+      variant="text"
+      href="#"
+    >
       LINKEDIN
     </Button>
   </div>
