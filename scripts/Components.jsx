@@ -1,11 +1,91 @@
-import * as React from "react"; //Импорты обязательны!!!
+import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
 
-//Боковое Меню
+// Боковое Меню
 export class Menu extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loginOpen: false,
+      username: "",
+      password: "",
+      emailError: "",
+      passwordError: ""
+    };
+  }
+
+  handleLoginOpen = () => {
+    this.setState({ 
+      loginOpen: true,
+      emailError: "",
+      passwordError: "" 
+    });
+  };
+
+  handleLoginClose = () => {
+    this.setState({ loginOpen: false });
+  };
+
+  handleInputChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+      emailError: e.target.name === "username" ? "" : this.state.emailError,
+      passwordError: e.target.name === "password" ? "" : this.state.passwordError
+    });
+  };
+
+  validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+
+  handleLoginSubmit = (e) => {
+    e.preventDefault();
+    
+    this.setState({
+      emailError: "",
+      passwordError: ""
+    });
+  
+    let hasError = false;
+    const newState = {};
+  
+    if (!this.state.username) {
+      newState.emailError = "Email обязателен";
+      hasError = true;
+    } else if (!this.validateEmail(this.state.username)) {
+      newState.emailError = "Введите корректный email";
+      hasError = true;
+    }
+  
+    if (!this.state.password) {
+      newState.passwordError = "Пароль обязателен";
+      hasError = true;
+    } else if (this.state.password.length < 6) {
+      newState.passwordError = "Пароль должен содержать минимум 6 символов";
+      hasError = true;
+    }
+  
+    if (hasError) {
+      this.setState(newState);
+      return;
+    }
+  
+    console.log("Login attempt:", this.state.username, this.state.password);
+    this.handleLoginClose();
+  };
+
   render() {
     return (
       <div className="menu">
@@ -49,6 +129,9 @@ export class Menu extends React.Component {
           >
             Контакты
           </a>
+          <button className="login-button" onClick={this.handleLoginOpen}>
+            Войти
+          </button>
         </nav>
         <section className="links">
           <a href="#">
@@ -64,12 +147,93 @@ export class Menu extends React.Component {
         <section className="copyright">
           Copyright &copy;2025 Sorkin and Kovsher. All rights reserved.
         </section>
+
+        {/* Модальное окно входа */}
+        <Dialog
+          open={this.state.loginOpen}
+          onClose={this.handleLoginClose}
+          maxWidth="xs"
+          fullWidth
+        >
+          <DialogTitle>
+            Вход в аккаунт
+            <IconButton
+              aria-label="close"
+              onClick={this.handleLoginClose}
+              sx={{
+                position: "absolute",
+                right: 8,
+                top: 8,
+                color: (theme) => theme.palette.grey[500]
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </DialogTitle>
+          <form onSubmit={this.handleLoginSubmit}>
+            <DialogContent dividers>
+              <TextField
+                autoFocus
+                margin="dense"
+                name="username"
+                label="Email"
+                // type="email"
+                fullWidth
+                variant="outlined"
+                value={this.state.username}
+                onChange={this.handleInputChange}
+                onKeyDown={(e) => {
+                  if (e.key === " ") {
+                    e.preventDefault();
+                  }
+                }}
+                error={!!this.state.emailError}
+                helperText={this.state.emailError}
+                required
+              />
+              <TextField
+                margin="dense"
+                name="password"
+                label="Пароль"
+                type="password"
+                fullWidth
+                variant="outlined"
+                value={this.state.password}
+                onChange={this.handleInputChange}
+                onKeyDown={(e) => {
+                  if (e.key === " ") {
+                    e.preventDefault();
+                  }
+                }}
+                error={!!this.state.passwordError}
+                helperText={this.state.passwordError}
+                required
+              />
+            </DialogContent>
+            <DialogActions sx={{ padding: "16px 24px" }}>
+              <Button 
+                onClick={this.handleLoginClose}
+                sx={{ color: "text.secondary" }}
+              >
+                Отмена
+              </Button>
+              <Button 
+                type="submit" 
+                color="primary" 
+                variant="contained"
+                sx={{ borderRadius: "4px" }}
+              >
+                Войти
+              </Button>
+            </DialogActions>
+          </form>
+        </Dialog>
       </div>
     );
   }
 }
 
-//Верхняя часть мобильного меню
+// Верхняя часть мобильного меню
 export class MobileHeader extends React.Component {
   render() {
     return (
@@ -83,7 +247,7 @@ export class MobileHeader extends React.Component {
   }
 }
 
-//функция выплывающего мобильного меню
+// Функция выплывающего мобильного меню
 function popMenu() {
   const menuToggle = document.querySelector(".menu-toggle");
   const menu = document.querySelector(".menu");
@@ -91,7 +255,7 @@ function popMenu() {
   menuToggle.classList.toggle("active");
 }
 
-//Дефолтная кнопка
+// Дефолтная кнопка
 export class GenButton extends React.Component {
   render() {
     return (
@@ -101,24 +265,28 @@ export class GenButton extends React.Component {
       </a>
     );
   }
-  DefaultProps = { text: "Button" /*, func: null*/ };
+  DefaultProps = { text: "Button" };
 }
 
+// Карточка блога
 export class BlogCard extends React.Component {
   render() {
     return (
       <Card className="blog_block">
         <CardMedia 
-            component="img"  //для адекватного отображения картинки, component указывает, какой это html элемент
-            image={this.props.img}
-            alt="blog_photo"
-            title="blog 1"/>
+          component="img"
+          image={this.props.img}
+          alt="blog_photo"
+          title="blog 1"
+        />
         <CardContent>   
           <Typography component="p" sx={{fontSize: "1.3rem", fontStyle: "italic"}}> 
             {this.props.date}
           </Typography>
-          <Typography component="p" variant="body" sx={{fontSize: "1.7rem",
-                    fontWeight: "bold"}}>
+          <Typography component="p" variant="body" sx={{
+            fontSize: "1.7rem",
+            fontWeight: "bold"
+          }}>
             {this.props.text}
           </Typography>
         </CardContent>
