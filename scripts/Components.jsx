@@ -21,15 +21,15 @@ export class Menu extends React.Component {
       username: "",
       password: "",
       emailError: "",
-      passwordError: ""
+      passwordError: "",
     };
   }
 
   handleLoginOpen = () => {
-    this.setState({ 
+    this.setState({
       loginOpen: true,
       emailError: "",
-      passwordError: "" 
+      passwordError: "",
     });
   };
 
@@ -41,7 +41,8 @@ export class Menu extends React.Component {
     this.setState({
       [e.target.name]: e.target.value,
       emailError: e.target.name === "username" ? "" : this.state.emailError,
-      passwordError: e.target.name === "password" ? "" : this.state.passwordError
+      passwordError:
+        e.target.name === "password" ? "" : this.state.passwordError,
     });
   };
 
@@ -52,15 +53,15 @@ export class Menu extends React.Component {
 
   handleLoginSubmit = (e) => {
     e.preventDefault();
-    
+
     this.setState({
       emailError: "",
-      passwordError: ""
+      passwordError: "",
     });
-  
+
     let hasError = false;
     const newState = {};
-  
+
     if (!this.state.username) {
       newState.emailError = "Email обязателен";
       hasError = true;
@@ -68,7 +69,7 @@ export class Menu extends React.Component {
       newState.emailError = "Введите корректный email";
       hasError = true;
     }
-  
+
     if (!this.state.password) {
       newState.passwordError = "Пароль обязателен";
       hasError = true;
@@ -76,12 +77,12 @@ export class Menu extends React.Component {
       newState.passwordError = "Пароль должен содержать минимум 6 символов";
       hasError = true;
     }
-  
+
     if (hasError) {
       this.setState(newState);
       return;
     }
-  
+
     console.log("Login attempt:", this.state.username, this.state.password);
     this.handleLoginClose();
   };
@@ -92,6 +93,22 @@ export class Menu extends React.Component {
         <section className="logo">
           <a href="index.html">.KoSo</a>
         </section>
+
+        <Button
+            sx={{
+              color: "rgb(235, 105, 233)",
+              fontFamily: "main",
+              fontWeight: 500,
+              "&:hover": {
+                backgroundColor: "rgba(255, 255, 255, 0.3)", // цвет кнопки при наведении
+              },
+            }}
+            className="login-button"
+            onClick={this.handleLoginOpen}
+          >
+            Войти
+          </Button>
+
         <nav className="navbar">
           <a
             href="index.html"
@@ -129,9 +146,6 @@ export class Menu extends React.Component {
           >
             Контакты
           </a>
-          <button className="login-button" onClick={this.handleLoginOpen}>
-            Войти
-          </button>
         </nav>
         <section className="links">
           <a href="#">
@@ -164,7 +178,7 @@ export class Menu extends React.Component {
                 position: "absolute",
                 right: 8,
                 top: 8,
-                color: (theme) => theme.palette.grey[500]
+                color: (theme) => theme.palette.grey[500],
               }}
             >
               <CloseIcon />
@@ -211,15 +225,15 @@ export class Menu extends React.Component {
               />
             </DialogContent>
             <DialogActions sx={{ padding: "16px 24px" }}>
-              <Button 
+              <Button
                 onClick={this.handleLoginClose}
                 sx={{ color: "text.secondary" }}
               >
                 Отмена
               </Button>
-              <Button 
-                type="submit" 
-                color="primary" 
+              <Button
+                type="submit"
+                color="primary"
                 variant="contained"
                 sx={{ borderRadius: "4px" }}
               >
@@ -273,20 +287,27 @@ export class BlogCard extends React.Component {
   render() {
     return (
       <Card className="blog_block">
-        <CardMedia 
+        <CardMedia
           component="img"
           image={this.props.img}
           alt="blog_photo"
           title="blog 1"
         />
-        <CardContent>   
-          <Typography component="p" sx={{fontSize: "1.3rem", fontStyle: "italic"}}> 
+        <CardContent>
+          <Typography
+            component="p"
+            sx={{ fontSize: "1.3rem", fontStyle: "italic" }}
+          >
             {this.props.date}
           </Typography>
-          <Typography component="p" variant="body" sx={{
-            fontSize: "1.7rem",
-            fontWeight: "bold"
-          }}>
+          <Typography
+            component="p"
+            variant="body"
+            sx={{
+              fontSize: "1.7rem",
+              fontWeight: "bold",
+            }}
+          >
             {this.props.text}
           </Typography>
         </CardContent>
