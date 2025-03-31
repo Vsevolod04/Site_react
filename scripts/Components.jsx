@@ -34,7 +34,7 @@ export class Menu extends React.Component {
   };
 
   handleLoginClose = () => {
-    this.setState({ loginOpen: false });
+    this.setState({ loginOpen: false, username: "", password: "" });
   };
 
   handleInputChange = (e) => {
@@ -49,6 +49,18 @@ export class Menu extends React.Component {
   validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
+  };
+
+  validatePassword = (password) => {
+    let flag = true;
+    const re1 = /.*[a-z]+.*/;
+    const re2 = /.*[A-Z]+.*/;
+    const re3 = /.*\d+.*/;
+    const re4 = /.*[\W_]+.*/
+    if (!(password.length >= 8 && re1.test(password) && re2.test(password)
+       && re3.test(password) && re4.test(password)))
+      flag = false;
+    return flag;
   };
 
   handleLoginSubmit = (e) => {
@@ -73,8 +85,8 @@ export class Menu extends React.Component {
     if (!this.state.password) {
       newState.passwordError = "Пароль обязателен";
       hasError = true;
-    } else if (this.state.password.length < 6) {
-      newState.passwordError = "Пароль должен содержать минимум 6 символов";
+    } else if (!this.validatePassword(this.state.password)) {
+      newState.passwordError = "Пароль должен содержать минимум 8 символов, содержать хотя бы 1 заглавную и строчную букву и спецсимвол";
       hasError = true;
     }
 
@@ -95,19 +107,101 @@ export class Menu extends React.Component {
         </section>
 
         <Button
-            sx={{
-              color: "rgb(235, 105, 233)",
-              fontFamily: "main",
-              fontWeight: 500,
-              "&:hover": {
-                backgroundColor: "rgba(255, 255, 255, 0.3)", // цвет кнопки при наведении
-              },
-            }}
-            className="login-button"
-            onClick={this.handleLoginOpen}
-          >
-            Войти
-          </Button>
+          sx={{
+            color: "rgb(255, 197, 52)",
+            fontFamily: "main",
+            fontWeight: 500,
+            "&:hover": {
+              backgroundColor: "rgba(255, 255, 255, 0.3)", // цвет кнопки при наведении
+            },
+          }}
+          className="login-button"
+          onClick={this.handleLoginOpen}
+        >
+          Войти
+        </Button>
+
+        {/* Модальное окно входа */}
+        <Dialog
+          open={this.state.loginOpen} //диалог открыт, если loginOpen = true
+          onClose={this.handleLoginClose}
+          maxWidth="sm"
+        >
+          <DialogTitle>
+            Вход в аккаунт
+            <IconButton
+              aria-label="close"
+              onClick={this.handleLoginClose}
+              sx={{
+                position: "absolute",
+                right: 8,
+                top: 8,
+                color: (theme) => theme.palette.grey[500],
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </DialogTitle>
+          <form onSubmit={this.handleLoginSubmit}>
+            <DialogContent dividers>
+              <TextField
+                slotProps={{ htmlInput: { maxLength: 100 } }}
+                autoFocus
+                margin="dense"
+                name="username"
+                label="Email"
+                // type="email"
+                fullWidth
+                variant="outlined"
+                value={this.state.username}
+                onChange={this.handleInputChange}
+                onKeyDown={(e) => {
+                  if ("\"' ".includes(e.key) || e.key === "Dead") {
+                    e.preventDefault();
+                  }
+                }}
+                error={this.state.emailError}
+                helperText={this.state.emailError}
+                required
+              />
+              <TextField
+                slotProps={{ htmlInput: { maxLength: 100 } }}
+                margin="dense"
+                name="password"
+                label="Пароль"
+                type="password"
+                fullWidth
+                variant="outlined"
+                value={this.state.password}
+                onChange={this.handleInputChange}
+                onKeyDown={(e) => {
+                  if ("\"'".includes(e.key) || e.key === "Dead") {
+                    e.preventDefault();
+                  }
+                }}
+                error={this.state.passwordError}
+                helperText={this.state.passwordError}
+                required
+              />
+            </DialogContent>
+            <DialogActions sx={{ padding: "16px 24px" }}>
+              <Button
+                onClick={this.handleLoginClose}
+                sx={{ color: "text.secondary" }}
+              >
+                Отмена
+              </Button>
+              <Button
+                type="submit"
+                color="primary"
+                variant="contained"
+                sx={{ borderRadius: "4px" }}
+              >
+                Войти
+              </Button>
+            </DialogActions>
+          </form>
+        </Dialog>
 
         <nav className="navbar">
           <a
@@ -161,87 +255,6 @@ export class Menu extends React.Component {
         <section className="copyright">
           Copyright &copy;2025 Sorkin and Kovsher. All rights reserved.
         </section>
-
-        {/* Модальное окно входа */}
-        <Dialog
-          open={this.state.loginOpen}
-          onClose={this.handleLoginClose}
-          maxWidth="xs"
-          fullWidth
-        >
-          <DialogTitle>
-            Вход в аккаунт
-            <IconButton
-              aria-label="close"
-              onClick={this.handleLoginClose}
-              sx={{
-                position: "absolute",
-                right: 8,
-                top: 8,
-                color: (theme) => theme.palette.grey[500],
-              }}
-            >
-              <CloseIcon />
-            </IconButton>
-          </DialogTitle>
-          <form onSubmit={this.handleLoginSubmit}>
-            <DialogContent dividers>
-              <TextField
-                autoFocus
-                margin="dense"
-                name="username"
-                label="Email"
-                // type="email"
-                fullWidth
-                variant="outlined"
-                value={this.state.username}
-                onChange={this.handleInputChange}
-                onKeyDown={(e) => {
-                  if (e.key === " ") {
-                    e.preventDefault();
-                  }
-                }}
-                error={!!this.state.emailError}
-                helperText={this.state.emailError}
-                required
-              />
-              <TextField
-                margin="dense"
-                name="password"
-                label="Пароль"
-                type="password"
-                fullWidth
-                variant="outlined"
-                value={this.state.password}
-                onChange={this.handleInputChange}
-                onKeyDown={(e) => {
-                  if (e.key === " ") {
-                    e.preventDefault();
-                  }
-                }}
-                error={!!this.state.passwordError}
-                helperText={this.state.passwordError}
-                required
-              />
-            </DialogContent>
-            <DialogActions sx={{ padding: "16px 24px" }}>
-              <Button
-                onClick={this.handleLoginClose}
-                sx={{ color: "text.secondary" }}
-              >
-                Отмена
-              </Button>
-              <Button
-                type="submit"
-                color="primary"
-                variant="contained"
-                sx={{ borderRadius: "4px" }}
-              >
-                Войти
-              </Button>
-            </DialogActions>
-          </form>
-        </Dialog>
       </div>
     );
   }
