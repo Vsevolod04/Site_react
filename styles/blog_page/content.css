@@ -36,14 +36,14 @@ main {
 }
 
 .blog {
-  display: flex;
-  justify-content: center;
-  gap: 3vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10%;
   max-width: 100vw;
 }
 
 .blog_block{
-  max-width: 27%;
+ /* max-width: 27%;*/
 }
 
 /*Кнопка загрузить больше*/
