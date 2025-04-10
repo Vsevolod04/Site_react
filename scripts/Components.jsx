@@ -53,10 +53,10 @@ export class Menu extends React.Component {
 
   validatePassword = (password) => {
     let flag = true;
-    const re1 = /.*[a-z]+.*/;
-    const re2 = /.*[A-Z]+.*/;
+    const re1 = /.*[a-zа-я]+.*/;
+    const re2 = /.*[A-ZА-Я]+.*/;
     const re3 = /.*\d+.*/;
-    const re4 = /.*[\W_]+.*/
+    const re4 = /.*[^A-ZА-Яa-zа-я\d]+.*/
     if (!(password.length >= 8 && re1.test(password) && re2.test(password)
        && re3.test(password) && re4.test(password)))
       flag = false;
@@ -150,7 +150,7 @@ export class Menu extends React.Component {
                 margin="dense"
                 name="username"
                 label="Email"
-                // type="email"
+                type="email"
                 fullWidth
                 variant="outlined"
                 value={this.state.username}
@@ -304,7 +304,7 @@ export class BlogCard extends React.Component {
           component="img"
           image={this.props.img}
           alt="blog_photo"
-          title="blog 1"
+          title="blog"
         />
         <CardContent>
           <Typography
