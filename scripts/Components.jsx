@@ -328,3 +328,5 @@ export class BlogCard extends React.Component {
     );
   }
 }
+
+

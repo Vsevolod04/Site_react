@@ -1,9 +1,7 @@
 import ReactDOM from "react-dom/client"; //Импорты обязательны!!!
-import { Menu, MobileHeader, GenButton, BlogCard } from "./Components";
+import { Menu, MobileHeader, BlogCard } from "./Components";
 import { StrictMode } from "react";
 import { flushSync } from "react-dom";
-
-
 
 ReactDOM.createRoot(document.querySelector("header")).render(
   <div>
@@ -13,40 +11,90 @@ ReactDOM.createRoot(document.querySelector("header")).render(
 );
 
 const blog = ReactDOM.createRoot(document.getElementById("blogContainer"));
-
 flushSync(() => {
   blog.render(
-    <div className="blog">
-      <BlogCard
-        className="blog_block"
-        date="10 Февраля, 2025"
-        text="10 примеров сайтов-портфолио"
-        img="/assets/photos/blog1.png"
-      />
-      <BlogCard
-        className="blog_block"
-        date="1 Февраля, 2025"
-        text="5 советов, как работать в команде"
-        img="/assets/photos/blog2.png"
-      />
-      <BlogCard
-        className="blog_block"
-        date="20 Января, 2025"
-        text="Защита сайтов от кибер-атак"
-        img="/assets/photos/blog3.png"
-      />
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" , gap: "2vh" }}>
+      <button type="button" id="openModalButton" >
+        Добавить новую карточку
+      </button>
+
+      <div id="modal" className="modal">
+        <div className="modal-content">
+          <span className="close">&times;</span>
+          <h2>Добавить новую карточку</h2>
+          <form id="addCardForm">
+            <label htmlFor="imageInput">Выберите фото:</label>
+            <input type="file" id="imageInput" accept="image/*" required />
+            <label htmlFor="captionInput">Подпись:</label>
+            <input
+              type="text"
+              id="captionInput"
+              maxLength="50"
+              placeholder="Введите подпись"
+              required
+            />
+            <label htmlFor="dateInput">
+              Дата (от 2000-01-01 до 2200-01-01):
+            </label>
+            <input
+              type="date"
+              id="dateInput"
+              min="2000-01-01"
+              max="2200-01-01"
+              title="от 2000-01-01 до 2200-01-01"
+              required
+            />
+            <button type="submit">ОК</button>
+            <button type="button" id="closeModalButton">
+              Отмена
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div className="blog" id="blogReact">
+        <BlogCard
+          className="blog_block"
+          date="10 Февраля, 2025"
+          text="10 примеров сайтов-портфолио"
+          img="/assets/photos/blog1.png"
+        />
+        <BlogCard
+          className="blog_block"
+          date="1 Февраля, 2025"
+          text="5 советов, как работать в команде"
+          img="/assets/photos/blog2.png"
+        />
+        <BlogCard
+          className="blog_block"
+          date="20 Января, 2025"
+          text="Защита сайтов от кибер-атак"
+          img="/assets/photos/blog3.png"
+        />
+      </div>
+
+      <div className="pagination">
+        <button id="prevButton">Назад</button>
+        <span id="pageInfo"></span>
+        <button id="nextButton">Вперед</button>
+      </div>
     </div>
   );
 });
 
 const fun = function () {
+  document.getElementById("captionInput").addEventListener("blur", function () {
+    // Удаляем пробелы в начале и в конце
+    this.value = this.value.trim();
+  });
+
   // Модальное окно
   const modal = document.getElementById("modal");
   const openModalButton = document.getElementById("openModalButton");
   const closeModalButton = document.getElementById("closeModalButton");
   const closeModalSymbol = document.querySelector(".close");
   const addCardForm = document.getElementById("addCardForm");
-  const blogContainer = document.getElementById("blogContainer");
+  const blogReact = document.getElementById("blogReact");
 
   // Открытие модального окна
   openModalButton.addEventListener("click", function () {
@@ -57,9 +105,7 @@ const fun = function () {
   closeModalSymbol.addEventListener("click", function () {
     modal.style.display = "none";
   });
-  closeModalButton.addEventListener("click", function () {
-    modal.style.display = "none";
-  });
+
 
   // Закрытие модального окна при клике вне его
   window.addEventListener("click", function (event) {
@@ -125,7 +171,7 @@ const fun = function () {
         newCard.appendChild(line);
   
         // Добавляем карточку в блог
-        blogContainer.appendChild(newCard);
+        blogReact.appendChild(newCard);
   
         // Закрываем модальное окно
         modal.style.display = "none";
@@ -146,7 +192,7 @@ const fun = function () {
 
   // Функция для отображения карточек на текущей странице
   function showCards(page) {
-    const cards = blogContainer.querySelectorAll(".blog_block");
+    const cards = blogReact.querySelectorAll(".blog_block");
     cards.forEach((card, index) => {
       if (index >= (page - 1) * cardsPerPage && index < page * cardsPerPage) {
         card.style.display = "block";
@@ -158,7 +204,7 @@ const fun = function () {
 
   // Функция для обновления информации о странице
   function updatePagination() {
-    const cards = blogContainer.querySelectorAll(".blog_block");
+    const cards = blogReact.querySelectorAll(".blog_block");
     const totalPages = Math.ceil(cards.length / cardsPerPage);
 
     if (currentPage > totalPages) {
@@ -167,9 +213,6 @@ const fun = function () {
 
     showCards(currentPage);
     pageInfo.textContent = `Страница ${currentPage} из ${totalPages}`;
-
-    // prevButton.disabled = currentPage === 1;
-    // nextButton.disabled = currentPage === totalPages;
   }
 
   // Кнопка "Назад"
@@ -178,7 +221,7 @@ const fun = function () {
       currentPage--;
       updatePagination();
     } else {
-      const cards = blogContainer.querySelectorAll(".blog_block");
+      const cards = blogReact.querySelectorAll(".blog_block");
       const totalPages = Math.ceil(cards.length / cardsPerPage);
 
       currentPage = totalPages;
@@ -188,7 +231,7 @@ const fun = function () {
 
   // Кнопка "Вперед"
   nextButton.addEventListener("click", function () {
-    const cards = blogContainer.querySelectorAll(".blog_block");
+    const cards = blogReact.querySelectorAll(".blog_block");
     const totalPages = Math.ceil(cards.length / cardsPerPage);
 
     if (currentPage < totalPages) {

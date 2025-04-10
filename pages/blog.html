@@ -29,41 +29,7 @@
             <p>ЧИТАЙТЕ НАШ БЛОГ</p>
         </section>
 
-        <!-- Кнопка для открытия модального окна -->
-        <button type="button" id="openModalButton">Добавить новую карточку</button>
-
-        <!-- Модальное окно -->
-        <div id="modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Добавить новую карточку</h2>
-                <form id="addCardForm">
-                    <label for="imageInput">Выберите фото:</label>
-                    <input type="file" id="imageInput" accept="image/*" required>
-                    <label for="captionInput">Подпись:</label>
-                    <input type="text" id="captionInput" maxlength="50" placeholder="Введите подпись" required>
-                    <label for="dateInput">Дата (от 2000-01-01 до 2200-01-01):</label>
-                    <input type="date" id="dateInput" min="2000-01-01" max="2200-01-01" title="от 2000-01-01 до 2200-01-01" required>
-                    <button type="submit">ОК</button>
-                    <button type="button" id="closeModalButton">Отмена</button>
-                </form>
-            </div>
-            <script>
-                document.getElementById('captionInput').addEventListener('blur', function() {
-                    // Удаляем пробелы в начале и в конце
-                    this.value = this.value.trim();
-                });
-            </script>
-        </div>
-
-
-        <div class="blog" id="blogContainer">
-        </div>
-
-        <div class="pagination">
-            <button id="prevButton">Назад</button>
-            <span id="pageInfo"></span>
-            <button id="nextButton">Вперед</button>
+        <div id="blogContainer">
         </div>
 
     </main>

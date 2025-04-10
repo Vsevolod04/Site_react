@@ -43,41 +43,9 @@ main {
 }
 
 .blog_block{
- /* max-width: 27%;*/
+  max-width: 18vw;
 }
 
-/*Кнопка загрузить больше*/
-
-.blog_link {
-  align-items: center;
-  margin-top: 2vh;
-  min-width: fit-content; /*Настройки ширины чтобы переноса слов не было*/
-  width: 30%;
-  max-width: 250px;
-  padding: 0.6%;
-  cursor: pointer;
-  background-color: black;
-}
-
-.blog_link a {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  color: white;
-  text-decoration: none;
-}
-
-.blog_link img {
-  background-image: linear-gradient(
-    to right,
-    #be69eb 0%,
-    #e04f4f 50%,
-    #f0a21a 100%
-  );
-  max-height: 3vh;
-  margin-left: 10%;
-  background-color: rgba(0, 166, 255, 0.5);
-}
 
 /*Мобилки*/
 
