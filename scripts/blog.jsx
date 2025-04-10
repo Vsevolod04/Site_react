@@ -9,9 +9,6 @@ ReactDOM.createRoot(document.querySelector("header")).render(
   </div>
 );
 
-ReactDOM.createRoot(document.getElementById("blog_link")).render(
-  <GenButton text="Загрузить больше"/>
-);
 
 ReactDOM.createRoot(document.getElementById("blog")).render(
   <div className="blog">

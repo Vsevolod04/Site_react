@@ -1,0 +1,26 @@
+/* Стили для пагинации */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1vh;
+}
+
+.pagination button {
+    padding: 6% 12%;
+    margin: 0 10%;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 15%;
+    cursor: pointer;
+}
+
+.pagination button:hover {
+    background-color: #95b0fa;
+}
+
+.pagination span {
+    font-size: 1rem;
+    margin: 0 10%;
+}

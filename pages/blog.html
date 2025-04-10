@@ -7,6 +7,8 @@
 
     <link rel="stylesheet" type="text/css" href="../styles/style.css">
     <link rel="stylesheet" type="text/css" href="../styles/blog_page/content.css">
+    <link rel="stylesheet" type="text/css" href="../styles/blog_page/modalWindow.css">
+    <link rel="stylesheet" type="text/css" href="../styles/blog_page/pagination.css">
 
     <title>Блог</title>
     <link rel="icon" type="image/png" href="icon/favicon-96x96.png" sizes="96x96">
@@ -27,11 +29,41 @@
             <p>ЧИТАЙТЕ НАШ БЛОГ</p>
         </section>
 
-        <div id="blog">
+        <!-- Кнопка для открытия модального окна -->
+        <button type="button" id="openModalButton">Добавить новую карточку</button>
+
+        <!-- Модальное окно -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Добавить новую карточку</h2>
+                <form id="addCardForm">
+                    <label for="imageInput">Выберите фото:</label>
+                    <input type="file" id="imageInput" accept="image/*" required>
+                    <label for="captionInput">Подпись:</label>
+                    <input type="text" id="captionInput" maxlength="50" placeholder="Введите подпись" required>
+                    <label for="dateInput">Дата (от 2000-01-01 до 2200-01-01):</label>
+                    <input type="date" id="dateInput" min="2000-01-01" max="2200-01-01" title="от 2000-01-01 до 2200-01-01" required>
+                    <button type="submit">ОК</button>
+                    <button type="button" id="closeModalButton">Отмена</button>
+                </form>
+            </div>
+            <script>
+                document.getElementById('captionInput').addEventListener('blur', function() {
+                    // Удаляем пробелы в начале и в конце
+                    this.value = this.value.trim();
+                });
+            </script>
         </div>
 
 
-        <div class="blog_link" id="blog_link">
+        <div id="blog">
+        </div>
+
+        <div class="pagination">
+            <button id="prevButton">Назад</button>
+            <span id="pageInfo"></span>
+            <button id="nextButton">Вперед</button>
         </div>
 
     </main>
