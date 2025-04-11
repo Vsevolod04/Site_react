@@ -11,6 +11,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
+import { display, height, maxHeight } from "@mui/system";
 
 // Боковое Меню
 export class Menu extends React.Component {
@@ -56,9 +57,16 @@ export class Menu extends React.Component {
     const re1 = /.*[a-zа-я]+.*/;
     const re2 = /.*[A-ZА-Я]+.*/;
     const re3 = /.*\d+.*/;
-    const re4 = /.*[^A-ZА-Яa-zа-я\d]+.*/
-    if (!(password.length >= 8 && re1.test(password) && re2.test(password)
-       && re3.test(password) && re4.test(password)))
+    const re4 = /.*[^A-ZА-Яa-zа-я\d]+.*/;
+    if (
+      !(
+        password.length >= 8 &&
+        re1.test(password) &&
+        re2.test(password) &&
+        re3.test(password) &&
+        re4.test(password)
+      )
+    )
       flag = false;
     return flag;
   };
@@ -86,7 +94,8 @@ export class Menu extends React.Component {
       newState.passwordError = "Пароль обязателен";
       hasError = true;
     } else if (!this.validatePassword(this.state.password)) {
-      newState.passwordError = "Пароль должен содержать минимум 8 символов, содержать хотя бы 1 заглавную и строчную букву и спецсимвол";
+      newState.passwordError =
+        "Пароль должен содержать минимум 8 символов, содержать хотя бы 1 заглавную и строчную букву и спецсимвол";
       hasError = true;
     }
 
@@ -330,3 +339,273 @@ export class BlogCard extends React.Component {
 }
 
 
+
+export class BlogControl extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cards: [
+        <BlogCard
+          className="blog_block"
+          date="10 Февраля, 2025"
+          text="10 примеров сайтов-портфолио"
+          img="/assets/photos/blog1.png"
+          key={1}
+        />,
+
+        <BlogCard
+          className="blog_block"
+          date="1 Февраля, 2025"
+          text="5 советов, как работать в команде"
+          img="/assets/photos/blog2.png"
+          key={2}
+        />,
+
+        <BlogCard
+          className="blog_block"
+          date="20 Января, 2025"
+          text="Защита сайтов от кибер-атак"
+          img="/assets/photos/blog3.png"
+          key={3}
+        />,
+      ],
+
+      title: "",
+      date: "",
+      files: [],
+      currentPage: 1,
+      cardsPerPage: 2,
+      cardsCount: 3,
+      pageInfo: "",
+
+      imgText: "", //для очистки формы при выходе
+    };
+  }
+
+  trimTitle = () => {
+    const newVal = this.state.title.trim();
+    this.setState({ title: newVal });
+  };
+
+  openModal = () => {
+    const modal = document.getElementById("modal");
+    this.setState({ title: "", date: "", files: [] });
+    modal.style.display = "block";
+  };
+
+  closeModal = () => {
+    const modal = document.getElementById("modal");
+    this.setState({ title: "", date: "", files: [], imgText: "" });
+    modal.style.display = "none";
+  };
+
+  handleInputChange = (e) => {
+    if (e.target.name == "files") {
+      this.setState({
+        [e.target.name]: e.target.files,
+        imgText: e.target.value,
+      });
+    } else {
+      this.setState({
+        [e.target.name]: e.target.value,
+      });
+    }
+  };
+
+  addCard = (e) => {
+    e.preventDefault();
+
+    // Получаем данные из формы
+    const file = this.state.files[0];
+    const img = URL.createObjectURL(file);
+    const title = this.state.title;
+    const date = this.state.date;
+
+    //Форматирование даты
+    let regexp = new RegExp("(\\d{4})-(\\d{2})-(\\d{2})");
+    let parse = regexp.exec(date);
+    const months = [
+      "Января",
+      "Февраля",
+      "Марта",
+      "Апреля",
+      "Мая",
+      "Июня",
+      "Июля",
+      "Августа",
+      "Сентября",
+      "Октября",
+      "Ноября",
+      "Декабря",
+    ];
+    const formattedDate =
+      parse[3] + " " + months[Number(parse[2]) - 1] + ", " + parse[1];
+
+    const newCount = this.state.cardsCount + 1;
+
+    const newCard = (
+      <BlogCard
+        className="blog_block"
+        date={formattedDate}
+        text={title}
+        img={img}
+        key={newCount}
+      />
+    );
+    const newCards = this.state.cards.slice();
+    newCards.push(newCard);
+
+    const lastPage = Math.ceil(newCount / this.state.cardsPerPage);
+    this.setState({cardsCount: newCount, cards: newCards, currentPage: lastPage });
+
+    // Закрываем модальное окно
+    this.closeModal();
+
+    this.updatePagination();
+  };
+
+  // Функция для отображения карточек на текущей странице
+  showCards = (page) => {
+    const cardsPerPage = this.state.cardsPerPage;
+    const cards = blogReact.querySelectorAll(".blog_block");
+    cards.forEach((card, index) => {
+      if (index >= (page - 1) * cardsPerPage && index < page * cardsPerPage) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  };
+
+  // Функция для обновления информации о странице
+  updatePagination = () => {
+    const currentPage = this.state.currentPage;
+    const cardsPerPage = this.state.cardsPerPage;
+    const totalPages = Math.ceil(this.state.cardsCount / cardsPerPage);
+
+    this.showCards(currentPage);
+    const text = `Страница ${currentPage} из ${totalPages}`;
+    this.setState({ pageInfo: text });
+  };
+
+  // Кнопка "Назад"
+  prev = () => {
+    let currentPage = this.state.currentPage;
+    if (currentPage > 1) {
+      currentPage--;
+      this.setState({ currentPage: currentPage });
+      this.updatePagination();
+    } else {
+      const totalPages = Math.ceil(
+        this.state.cardsCount / this.state.cardsPerPage
+      );
+      currentPage = totalPages;
+      this.setState({ currentPage: currentPage });
+      this.updatePagination();
+    }
+  };
+
+  // Кнопка "Вперед"
+  next = () => {
+    const totalPages = Math.ceil(
+      this.state.cardsCount / this.state.cardsPerPage
+    );
+    let currentPage = this.state.currentPage;
+    if (currentPage < totalPages) {
+      currentPage++;
+      this.setState({ currentPage: currentPage });
+      this.updatePagination();
+    } else {
+      currentPage = 1;
+      this.setState({ currentPage: currentPage });
+      this.updatePagination();
+    }
+  };
+
+  render() {
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "2vh",
+        }}
+        onLoad={this.updatePagination}
+      >
+        <button type="button" id="openModalButton" onClick={this.openModal}>
+          Добавить новую карточку
+        </button>
+
+        <div id="modal" className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={this.closeModal}>
+              &times;
+            </span>
+            <h2>Добавить новую карточку</h2>
+            <form id="addCardForm" onSubmit={this.addCard}>
+              <label htmlFor="imageInput">Выберите фото:</label>
+              <input
+                type="file"
+                id="imageInput"
+                accept="image/*"
+                name="files"
+                value={this.state.imgText}
+                onChange={this.handleInputChange}
+                required
+              />
+              <label htmlFor="captionInput">Подпись:</label>
+              <input
+                type="text"
+                id="captionInput"
+                name="title"
+                maxLength="50"
+                placeholder="Введите подпись"
+                value={this.state.title}
+                onBlur={this.trimTitle}
+                onChange={this.handleInputChange}
+                required
+              />
+              <label htmlFor="dateInput">
+                Дата (от 2000-01-01 до 2200-01-01):
+              </label>
+              <input
+                type="date"
+                name="date"
+                id="dateInput"
+                value={this.state.date}
+                min="2000-01-01"
+                max="2200-01-01"
+                title="от 2000-01-01 до 2200-01-01"
+                onChange={this.handleInputChange}
+                required
+              />
+              <button type="submit">ОК</button>
+              <button
+                type="button"
+                id="closeModalButton"
+                onClick={this.closeModal}
+              >
+                Отмена
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div className="blog" id="blogReact">
+          {this.state.cards}
+        </div>
+
+        <div className="pagination">
+          <button id="prevButton" onClick={this.prev}>
+            Назад
+          </button>
+          <span id="pageInfo">{this.state.pageInfo}</span>
+          <button id="nextButton" onClick={this.next}>
+            Вперед
+          </button>
+        </div>
+      </div>
+    );
+  }
+}

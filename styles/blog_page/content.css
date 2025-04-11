@@ -38,6 +38,8 @@ main {
 .blog {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  /*height: 30vh;*/
+  min-height: fit-content;
   gap: 10%;
   max-width: 100vw;
 }
