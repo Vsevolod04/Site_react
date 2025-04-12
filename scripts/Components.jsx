@@ -11,7 +11,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
-import { display, height, maxHeight } from "@mui/system";
 
 // Боковое Меню
 export class Menu extends React.Component {
@@ -271,11 +270,19 @@ export class Menu extends React.Component {
 
 // Верхняя часть мобильного меню
 export class MobileHeader extends React.Component {
+  // Функция выплывающего мобильного меню
+  popMenu = () => {
+    const menuToggle = document.querySelector(".menu-toggle");
+    const menu = document.querySelector(".menu");
+    menu.classList.toggle("active");
+    menuToggle.classList.toggle("active");
+  };
+
   render() {
     return (
       <div className="mobile-header">
         <div className="logo">.KoSo</div>
-        <div className="menu-toggle" onClick={popMenu}>
+        <div className="menu-toggle" onClick={this.popMenu}>
           &#9776;
         </div>
       </div>
@@ -283,62 +290,47 @@ export class MobileHeader extends React.Component {
   }
 }
 
-// Функция выплывающего мобильного меню
-function popMenu() {
-  const menuToggle = document.querySelector(".menu-toggle");
-  const menu = document.querySelector(".menu");
-  menu.classList.toggle("active");
-  menuToggle.classList.toggle("active");
-}
-
 // Дефолтная кнопка
-export class GenButton extends React.Component {
-  render() {
-    return (
-      <a className="button">
-        {this.props.text}
-        <img src="/icon/web-app-manifest-192x192.png" alt="arrow_icon" />
-      </a>
-    );
-  }
-  DefaultProps = { text: "Button" };
+export function GenButton({ text = "button" }) {
+  return (
+    <a className="button">
+      {text}
+      <img src="/icon/web-app-manifest-192x192.png" alt="arrow_icon" />
+    </a>
+  );
 }
 
 // Карточка блога
-export class BlogCard extends React.Component {
-  render() {
-    return (
-      <Card className="blog_block">
-        <CardMedia
-          component="img"
-          image={this.props.img}
-          alt="blog_photo"
-          title="blog"
-        />
-        <CardContent>
-          <Typography
-            component="p"
-            sx={{ fontSize: "1.3rem", fontStyle: "italic" }}
-          >
-            {this.props.date}
-          </Typography>
-          <Typography
-            component="p"
-            variant="body"
-            sx={{
-              fontSize: "1.7rem",
-              fontWeight: "bold",
-            }}
-          >
-            {this.props.text}
-          </Typography>
-        </CardContent>
-      </Card>
-    );
-  }
+function BlogCard(props) {
+  return (
+    <Card className="blog_block">
+      <CardMedia
+        component="img"
+        image={props.img}
+        alt="blog_photo"
+        title="blog"
+      />
+      <CardContent>
+        <Typography
+          component="p"
+          sx={{ fontSize: "1.3rem", fontStyle: "italic" }}
+        >
+          {props.date}
+        </Typography>
+        <Typography
+          component="p"
+          variant="body"
+          sx={{
+            fontSize: "1.7rem",
+            fontWeight: "bold",
+          }}
+        >
+          {props.text}
+        </Typography>
+      </CardContent>
+    </Card>
+  );
 }
-
-
 
 export class BlogControl extends React.Component {
   constructor(props) {
@@ -380,7 +372,16 @@ export class BlogControl extends React.Component {
 
       imgText: "", //для очистки формы при выходе
     };
+    this.ref = React.createRef();
   }
+
+  handleClickOutside = (event) => {
+    const modal = document.getElementById("modal");
+    console.log(event.target);
+    if (event.target === modal) {
+      this.closeModal();
+    }
+  };
 
   trimTitle = () => {
     const newVal = this.state.title.trim();
@@ -389,7 +390,6 @@ export class BlogControl extends React.Component {
 
   openModal = () => {
     const modal = document.getElementById("modal");
-    this.setState({ title: "", date: "", files: [] });
     modal.style.display = "block";
   };
 
@@ -456,7 +456,11 @@ export class BlogControl extends React.Component {
     newCards.push(newCard);
 
     const lastPage = Math.ceil(newCount / this.state.cardsPerPage);
-    this.setState({cardsCount: newCount, cards: newCards, currentPage: lastPage });
+    this.setState({
+      cardsCount: newCount,
+      cards: newCards,
+      currentPage: lastPage,
+    });
 
     // Закрываем модальное окно
     this.closeModal();
@@ -494,15 +498,14 @@ export class BlogControl extends React.Component {
     if (currentPage > 1) {
       currentPage--;
       this.setState({ currentPage: currentPage });
-      this.updatePagination();
     } else {
       const totalPages = Math.ceil(
         this.state.cardsCount / this.state.cardsPerPage
       );
       currentPage = totalPages;
       this.setState({ currentPage: currentPage });
-      this.updatePagination();
     }
+    this.updatePagination();
   };
 
   // Кнопка "Вперед"
@@ -514,13 +517,25 @@ export class BlogControl extends React.Component {
     if (currentPage < totalPages) {
       currentPage++;
       this.setState({ currentPage: currentPage });
-      this.updatePagination();
     } else {
       currentPage = 1;
       this.setState({ currentPage: currentPage });
-      this.updatePagination();
     }
+    this.updatePagination();
   };
+
+  componentDidMount() {
+    this.updatePagination();
+    document.addEventListener("click", this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("click", this.handleClickOutside);
+  }
+
+  /*componentDidUpdate(){
+    this.updatePagination();
+  }*/
 
   render() {
     return (
@@ -531,7 +546,6 @@ export class BlogControl extends React.Component {
           alignItems: "center",
           gap: "2vh",
         }}
-        onLoad={this.updatePagination}
       >
         <button type="button" id="openModalButton" onClick={this.openModal}>
           Добавить новую карточку
