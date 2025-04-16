@@ -22,6 +22,7 @@ export class Menu extends React.Component {
       password: "",
       emailError: "",
       passwordError: "",
+      isAuth: localStorage.getItem('isAuth') === 'true',
     };
   }
 
@@ -70,7 +71,7 @@ export class Menu extends React.Component {
     return flag;
   };
 
-  handleLoginSubmit = (e) => {
+  handleLoginSubmit = async (e) => {
     e.preventDefault();
 
     this.setState({
@@ -103,9 +104,65 @@ export class Menu extends React.Component {
       return;
     }
 
-    console.log("Login attempt:", this.state.username, this.state.password);
-    this.handleLoginClose();
+    const hashedPassword = await this.hashPassword(this.state.password);
+
+    console.log("Login attempt:", this.state.username, hashedPassword);
+
+    try {
+      const response = await fetch('http://localhost:5129/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: this.state.username,
+          password: hashedPassword
+        })
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        localStorage.setItem('isAuth', 'false');
+        throw new Error(errorData.message || 'Ошибка авторизации');
+      }
+  
+      const data = await response.json();
+      console.log('Успешный вход:', data);
+  
+      localStorage.setItem('isAuth', 'true'); 
+      this.setState({ 
+        isAuth: true,
+        loginOpen: false
+      });
+  
+      this.handleLoginClose();  
+  
+    } catch (error) {
+      console.error('Ошибка при входе:', error);
+      this.setState({
+        emailError : '',
+        passwordError: 'Неверный email или пароль'
+      });
+    }
   };
+
+  hashPassword = async (password) => {
+    // Простое хеширование для примера (в реальном приложении используйте более надежные методы)
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    return hashHex;
+  };
+
+  handleLogout = () => {
+    localStorage.setItem('isAuth', 'false');
+    this.setState({ isAuth: false });
+  };
+
+
+
 
   render() {
     return (
@@ -114,20 +171,37 @@ export class Menu extends React.Component {
           <a href="index.html">.KoSo</a>
         </section>
 
+        {this.state.isAuth ? (
         <Button
           sx={{
-            color: "rgb(255, 197, 52)",
-            fontFamily: "main",
-            fontWeight: 500,
-            "&:hover": {
-              backgroundColor: "rgba(255, 255, 255, 0.3)", // цвет кнопки при наведении
-            },
+          color: "rgb(255, 197, 52)",
+          fontFamily: "main",
+          fontWeight: 500,
+          "&:hover": {
+            backgroundColor: "rgba(255, 255, 255, 0.3)",
+          },
+        }}
+          className="logout-button"
+          onClick={this.handleLogout}
+        >
+          Выйти
+        </Button>
+        ) : (
+        <Button
+          sx={{
+              color: "rgb(255, 197, 52)",
+              fontFamily: "main",
+              fontWeight: 500,
+              "&:hover": {
+                backgroundColor: "rgba(255, 255, 255, 0.3)",
+              },
           }}
           className="login-button"
           onClick={this.handleLoginOpen}
         >
           Войти
         </Button>
+        )}
 
         {/* Модальное окно входа */}
         <Dialog
