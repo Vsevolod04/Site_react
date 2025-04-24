@@ -57,16 +57,9 @@ export class Menu extends React.Component {
     const re1 = /.*[a-zа-я]+.*/;
     const re2 = /.*[A-ZА-Я]+.*/;
     const re3 = /.*\d+.*/;
-    const re4 = /.*[^A-ZА-Яa-zа-я\d]+.*/;
-    if (
-      !(
-        password.length >= 8 &&
-        re1.test(password) &&
-        re2.test(password) &&
-        re3.test(password) &&
-        re4.test(password)
-      )
-    )
+    const re4 = /.*[^A-ZА-Яa-zа-я\d]+.*/
+    if (!(password.length >= 8 && re1.test(password) && re2.test(password)
+       && re3.test(password) && re4.test(password)))
       flag = false;
     return flag;
   };
@@ -95,7 +88,7 @@ export class Menu extends React.Component {
       hasError = true;
     } else if (!this.validatePassword(this.state.password)) {
       newState.passwordError =
-        "Пароль должен содержать минимум 8 символов, содержать хотя бы 1 заглавную и строчную букву и спецсимвол";
+        "Пароль должен содержать минимум 8 и не более 100 символов, содержать хотя бы 1 заглавную и строчную букву, число и спецсимвол";
       hasError = true;
     }
 
