@@ -58,7 +58,7 @@ export class Menu extends React.Component {
     const re3 = /.*\d+.*/;
     const re4 = /.*[^A-ZА-Яa-zа-я\d]+.*/
     if (!(password.length >= 8 && re1.test(password) && re2.test(password)
-       && re3.test(password) && re4.test(password)))
+       && re3.test(password) && re4.test(password)) && password.length <= 100)
       flag = false;
     return flag;
   };
@@ -86,7 +86,7 @@ export class Menu extends React.Component {
       newState.passwordError = "Пароль обязателен";
       hasError = true;
     } else if (!this.validatePassword(this.state.password)) {
-      newState.passwordError = "Пароль должен содержать минимум 8 символов, содержать хотя бы 1 заглавную и строчную букву и спецсимвол";
+      newState.passwordError = "Пароль должен содержать минимум 8 символов, но не более 100, содержать хотя бы 1 заглавную и строчную букву и спецсимвол";
       hasError = true;
     }
 
