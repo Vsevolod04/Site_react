@@ -1,3 +1,3 @@
 # React + Vite
 
-LAB 3 for SSP
+LAB 3 for ITIVP
